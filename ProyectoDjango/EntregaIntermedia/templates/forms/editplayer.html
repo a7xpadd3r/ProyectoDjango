@@ -1,0 +1,35 @@
+<center> Hijo: edituser.html </center>
+{% extends 'home.html' %}
+
+{% block content %} 
+
+<head>
+    <title>zFinder {% if title %} | {{ title }} {% endif %}</title>
+</head>
+
+<center>
+    <h1 style = 'color:blue'> <center> Editar entrada </center> </h1>
+    {% if message %} <a href="{% url 'players' %}"> Volver </a> {% endif %}
+    {% if not message %} <a href="{% url 'players' %}">Cancelar</a> {% endif %}
+</center>
+<br></br>
+
+<fieldset>
+    {% if not message %}
+        <legend style = 'color:red'> Modifique los campos requeridos</legend>
+        <form form = 'EntregaIntermedia/forms' method = 'POST'>
+            {% csrf_token %}
+            <p> {{ form.as_table }}
+                <b> <center> Formato de fecha: AAAA-MM-DD (Año, Mes, Día) </center> </b>
+                <b> <center> Los IDs y los avatares de las entradas NO pueden modificarse. </center> </b>
+            </p>
+            <input type = "submit" value = "Guardar cambios">
+        </form>
+        {% endif %}
+
+    {% if message %}
+        <h2 style = 'color:green'> <center> <b> {{ message }} </center> </h2> 
+    {% endif %}
+</fieldset>
+
+{% endblock %}

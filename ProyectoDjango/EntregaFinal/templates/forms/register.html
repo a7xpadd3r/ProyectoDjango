@@ -1,0 +1,47 @@
+<center> Hijo: register.html </center>
+{% extends 'home.html' %}
+{% block content %} 
+
+<head>
+    <title>zFinder {% if title %} | {{ title }} {% endif %}</title>
+</head>
+
+<h1 style = 'color:green'> <center> <b>Registrarse</center> </b></h1> 
+    <fieldset> <center> <br>
+        ||
+        <a href="{% url 'index' %}">Volver al inicio</a>
+        ||
+        <br></br>
+</fieldset> </center></br>
+    
+{% if user.is_authenticated and form %}
+<fieldset> <center>
+Sesión activa para '{{ request.user.username }}'. Cierra la sesión activa para registrar una cuenta nueva.
+</center> </fieldset>
+{% endif %}
+
+{% if not user.is_authenticated %}
+
+{% if ok %}
+<center> <h2 style = 'color:green'> {{ ok }} </h2> </center> 
+{% endif %}
+
+{% if form %}
+<fieldset> <legend style = 'color:red'> <b> Rellene los campos requeridos </b></legend>
+
+    <center>
+    Ya tienes cuenta? <a href="{% url 'login' %}">Iniciar sesión</a><br></br>
+    </center>
+
+    {% if error %} <center> <h2 style = 'color:red'> {{ error }} </h2> {% endif %}
+
+        <form action = "" enctype="multipart/form-data" method = 'POST'>
+            {% csrf_token %}
+         {{ form }}{{ profile }}
+        </br> <button type = "submit"> Registrarse </button>
+        Puedes agregar información extra y un avatar luego.
+{% endif %}
+
+{% endif %}
+
+</fieldset> {% endblock %}

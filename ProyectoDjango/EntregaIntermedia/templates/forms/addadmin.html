@@ -1,0 +1,69 @@
+<center> Hijo: addadmin.html </center>
+{% extends 'home.html' %}
+{% block content %} 
+
+<head>
+    <title>zFinder {% if title %} | {{ title }} {% endif %}</title>
+</head>
+
+<center>
+    <h1 style = 'color:blue'> <center> Agregar administrador nuevo a la base de datos </center> </h1>
+    <a href="{% url 'admins' %}">Volver</a>
+</center>
+
+<fieldset>
+        <legend style = 'color:red'> {% if not newentry %} Ingrese los campos requeridos {% endif %} {% if newentry %} {{ message }} {% endif %} </legend>
+        
+        {% if newentry %} <fieldset> <center>
+        <p><b>Nivel de acceso:</b> {{ newentry.adminaccesslevel }} </p>
+        <p><b>Fecha de creación:</b> {{ newentry.creationdate }}
+        <p><b>Avatar: </b><img src="/media/{{ newentry.adminavatar }}" width="70" height="100" align = center></br>
+        <br></br> <a href="{% url 'addadmin' %}">¿Agregar otra entrada?</a>
+        </center> </fieldset> {% endif %}
+
+
+        {% if not newentry %}
+        <form form = 'EntregaIntermedia/forms' enctype="multipart/form-data" method = 'POST'>
+            {% csrf_token %}
+            <p>
+                {{ form.as_table }} 
+                <b style = 'color:red'> Puedes modificar luego su nivel de acceso pero no el ID asignado. </b>
+                {% if form.value == 'xd'  %} <input type = "submit" value = "Agregar administrador"> {% endif %}
+                <input type = "submit" value = "Agregar administrador">
+                {% if message %}
+                <center> <b> {{ message }} </b> </center>
+                {% endif %}
+            </p>
+            
+            <fieldset>
+                <b style = 'color:green'>  Niveles de acceso </b>
+                <fieldset style='color:blue'> <b> observer: </b> <br>
+                    Activar invencibilidad sólo a sí mismo. <br>
+                    Activar invisibilidad sólo a sí mismo. <br>
+                    Teletransportarse a un jugador. <br>
+                    Ver jugadores invisibles. <br>
+                    Ignorar colisión.
+                </fieldset>
+                <fieldset style='color:blue'> <b> moderator </b> <br>
+                    Activar invencibilidad a sí mismo y a resto de jugadores. <br>
+                    Activar invisibilidad sólo a sí mismo y a resto de jugadores. <br>
+                    Teletransportarse a un jugador y teletransportar hacia posición X jugador. <br>
+                    Ver jugadores invisibles, expulsaros y silenciarlos. <br>
+                    Ignorar colisión y otorgar ítems.
+                </fieldset>
+                <fieldset style='color:blue'> <b> administrator </b> <br>
+                    Activar invencibilidad a sí mismo y a resto de jugadores. <br>
+                    Activar invisibilidad sólo a sí mismo y a resto de jugadores. <br>
+                    Teletransportarse a un jugador y teletransportar hacia posición X jugador. <br>
+                    Ver jugadores invisibles, expulsaros y silenciarlos. <br>
+                    Ignorar colisión y otorgar ítems. <br>
+                    Agregar usuarios a la lista blanca y negra. <br>
+                    Agregar privilegios de Oberservador/ Moderador. <br>
+                    Crear hordas, ver inventario de jugadores e historial de acciones.
+                </fieldset>
+            </fieldset>
+        </form>
+        {% endif %}
+</fieldset>
+
+{% endblock %}

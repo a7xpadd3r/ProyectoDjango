@@ -1,0 +1,44 @@
+<center> Hijo: addvehicle.html </center>
+{% extends 'home.html' %}
+{% block content %} 
+
+<head>
+    <title>zFinder {% if title %} | {{ title }} {% endif %}</title>
+</head>
+
+<center>
+    <h1 style = 'color:blue'> <center> Agregar vehículo nuevo a la base de datos </center> </h1>
+    <a href="{% url 'vehicles' %}">Volver</a>
+</center>
+
+<fieldset>
+        <legend style = 'color:red'> {% if not newentry %} Ingrese los campos requeridos {% endif %} {% if newentry %} {{ message }} {% endif %} </legend>
+
+    {% if errormessage %}
+        <fieldset> <center style = 'color:red'> <b> {{ errormessage }} </b> </center> </fieldset>
+    {% endif %}
+
+    {% if newentry %} <fieldset> <center>
+    <p><b>Nombre (tipo) de vehículo:</b> {{ newentry.vehiclemodel }}</p>
+    <p><b>Posición en el mundo (X,Y,Z):</b> {{ newentry.vehicleposX }},{{ newentry.vehicleposY }} </p>
+    <p><b>Fecha de creación:</b> {{ newentry.creationdate }}</p>
+    <p><b>Ícono: </b><img src="/media/{{ newentry.vehicleicon }}" width="150" height="100" align = center></br>
+    </center> </fieldset>
+    <br></br> <a href="{% url 'addvehicle' %}">¿Agregar otra entrada?</a>
+    {% endif %}
+
+    {% if not newentry %}
+    <form form = 'EntregaIntermedia/forms' enctype="multipart/form-data" method = 'POST'>
+            {% csrf_token %}
+            <p>
+                {{ form.as_table }}
+            </p>
+            <center> Los modelos de vehículos <b style = 'color:red'>NO</b> pueden repetirse. Además, el mismo <b style = 'color:red'>no puede modificarse luego</b>. </center>
+            <input type = "submit" value = "Agregar vehículo">
+        </form>
+    {% endif %}
+
+
+</fieldset>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+<center> Hijo: players-cbv.html </center>
+{% extends 'home.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+    <title>zFinder {% if title %} | {{ title }} {% endif %}</title>
+</head>
+
+<center>
+    <img src={% static "Players.png" %}/> 
+</center>
+
+<h1 style = 'color:blue'> <center> <b> Jugadores  </b> - Longitud de la base de datos: {{ amount }}</center> </h1> 
+<b style = 'color:green'> <center> Método: ListView </b>
+    ||
+<a href="{% url 'players' %}">Cambiar a TemplateView </center></a></br>
+<fieldset> <center> 
+    ||
+    <a href="{% url 'index' %}">Volver al inicio</a>
+    ||
+    <a href="{% url 'adduser' %}">Agregar jugador</a>
+    ||
+    <a href="{% url 'searchuser' %}">Buscar jugador</a>
+    ||
+</center> </fieldset>
+{% for x in object_list %}
+
+    <fieldset>
+        <legend style = 'color:red' ><b> {{ x.usernick }} </b></legend>
+        <p><b>Posición en la base de datos:</b> {{ forloop.counter0 }}</p>
+        <p><b>ID del jugador:</b> {{ x.userid }}</p>
+        <p><b>Última conexión:</b> {{ x.userlastconnection }}</p>
+        <p><b>Posición en el mundo (X,Y,Z):</b> {{ x.userposX }},{{ x.userposY }},{{ x.userposZ }} </p>
+        ||
+        <a href="{% url 'edituser' x.userid %}" value = >Modificar entrada</a>
+        ||
+        <a href="{% url 'deleteuser' x.userid %}" value = >Eliminar entrada</a>
+        ||
+    </fieldset>
+
+{% endfor %}
+{% endblock %}

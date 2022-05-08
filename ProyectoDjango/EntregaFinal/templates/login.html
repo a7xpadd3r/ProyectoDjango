@@ -1,0 +1,55 @@
+<center> Hijo: login.html </center>
+{% extends 'home.html' %}
+{% block content %} 
+
+<head>
+    <title>zFinder {% if title %} | {{ title }} {% endif %}</title>
+</head>
+
+<h1 style = 'color:green'> <center> <b>Iniciar sesión </center> </h1> </b>
+    <fieldset> <center> <br>
+        ||
+        <a href="{% url 'index' %}">Volver al inicio</a>
+        ||
+        <br></br>
+    </fieldset> </center>
+
+    
+    
+    <center><fieldset>
+        {% if OK %} <center>
+            <h2 style = 'color:green'> {{ OK }} </h2>
+            <img src="/media/{{ request.user.profile.avatar }}" width="200" height="200" align = center>     
+        </center>  
+        {% endif %}
+        
+        {% if error %} <center>
+            <h2 style = 'color:red'> {{ error }} </h2>            
+        </center>  
+        {% endif %}
+
+        {% if not user.is_authenticated %}
+        {% if form %} <legend style = 'color:red'> <b> Ingrese sus credenciales </b></legend>
+        {% endif %}{% endif %}
+{% if user.is_authenticated and form%}
+    <center>
+        Ya existe una sesión activa para '{{ request.user.username }}'.
+    </center>
+{% endif %}
+
+
+
+{% if not user.is_authenticated %}
+{% if form %} <center>
+    No tienes cuenta? <a href="{% url 'register' %}">Regístrate</a>! <br></br>
+    <b> Administrador por defecto: 'admin' 'admin' </b> <br></br>
+    <b> Usuario por defecto: 'batman' - 'focus100' </b> <br></br>
+        <form action = "" method = "POST">
+            {% csrf_token %} {{ form }}
+        <button type = "submit"> iniciar </button>
+    {% endif %}
+{% endif %}
+
+</fieldset>
+{% endblock %}
+        

@@ -1,0 +1,50 @@
+<center> Hijo: vehicles.html </center>
+{% extends 'home.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+    <title>zFinder {% if title %} | {{ title }} {% endif %}</title>
+</head>
+
+<center>
+    <img src={% static "ChevalierCeriseWagon.gif" %}/> 
+    <img src={% static "PickUpVan.gif" %}/>
+</center>
+
+<h1 style = 'color:blue'> <center> <b> Vehículos </b> - Longitud de la base de datos: {{ amount }}</center> </h1> 
+<fieldset> <center> 
+    ||
+    <a href="{% url 'index' %}">Volver al inicio</a>
+    ||{% if user.is_authenticated %}
+    <a href="{% url 'addvehicle' %}">Agregar vehículo</a>
+    || {% endif %}
+    <a href="{% url 'searchvehicle' %}">Buscar vehículo</a>
+    ||
+</fieldset> </center> 
+
+{% for x in vehiclesdata %}
+<fieldset>
+        <legend style = 'color:red' ><b> {{ x.vehiclemodel }} </b></legend>
+        <p><b>Posición en la base de datos:</b> {{ forloop.counter0 }}</p>
+        <p><b>Nombre (tipo) de vehículo:</b> {{ x.vehiclemodel }}</p>
+        <p><b>Posición en el mundo (X,Y,Z):</b> {{ x.vehicleposX }},{{ x.vehicleposY }} </p>
+        <p><b>Fecha de creación:</b> {{ x.creationdate }}</p>
+        <p><b>Creado por:</b> {{ x.createdby }}</p>
+        <p><b>Última modificación:</b> {{ x.modificationdate }}</p>
+        <p><b>Modificación hecha por:</b> {{ x.lastmodifiedby }}</p>
+        <p><b>Ícono: </b><img src="/media/{{ x.vehicleicon }}" width="150" height="100" align = center></br>
+        {% if request.user.is_superuser %}
+        ||
+        <a href="{% url 'editvehicle' x.vehiclemodel %}" value = >Modificar entrada</a>
+        ||
+        <a href="{% url 'deletevehicle' x.vehiclemodel %}" value = >Eliminar entrada</a>
+        ||
+        {% endif %}
+        {% if not request.user.is_superuser %}
+        <b style = 'color:green'> Aviso: </b> <i>Sólo los administradores pueden modificar y/o eliminar entradas en esta categoría.</i>
+        {% endif %}
+</fieldset>
+{% endfor %}
+
+{% endblock %}

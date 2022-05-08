@@ -1,0 +1,52 @@
+<center> Hijo: players.html </center>
+{% extends 'home.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+    <title>zFinder {% if title %} | {{ title }} {% endif %}</title>
+</head>
+
+<center>
+    <img src={% static "Players.png" %}/> 
+</center>
+
+<h1 style = 'color:blue'> <center> <b> Jugadores  </b> - Longitud de la base de datos: {{ amount }}</center> </h1> 
+<fieldset> <center> </b>
+    ||
+    <a href="{% url 'index' %}">Volver al inicio</a>
+    {% if request.user.is_superuser %} ||
+    <a href="{% url 'adduser' %}">Agregar jugador</a> {% endif %}
+    ||
+    <a href="{% url 'searchuser' %}">Buscar jugador</a>
+    ||
+</center> </fieldset></b>
+
+{% for x in playersdata %}</b>
+    <fieldset>
+        <legend style = 'color:red' ><b> {{ x.usernick }} </b></legend>
+        <p><b>Posición en la base de datos:</b> {{ forloop.counter0 }}</p>
+        <p><b>ID del jugador:</b> {{ x.userid }}</p>
+        <p><b>Última conexión:</b> {{ x.userlastconnection }}</p>
+        <p><b>Posición en el mundo (X,Y,Z):</b> {{ x.userposX }},{{ x.userposY }},{{ x.userposZ }} </p>
+        <p><b>Fecha de creación:</b> {{ x.creationdate }} </p>
+        <p><b>Creado por:</b> {{ x.createdby }} </p>
+        <p><b>Última modificación:</b> {{ x.modificationdate }} </p>
+        <p><b>Modificación hecha por:</b> {{ x.lastmodifiedby }} </p>
+        <p><b>Avatar: </b><img src="/media/{{ x.playericon }}" width="68" height="80" align = center>
+    </br>
+        {% if request.user.is_superuser %}
+        ||
+        <a href="{% url 'edituser' x.userid %}" value = >Modificar entrada</a>
+        ||
+        <a href="{% url 'deleteuser' x.userid %}" value = >Eliminar entrada</a>
+        ||
+        {% endif %}
+        {% if not request.user.is_superuser %}
+        <b style = 'color:green'> Aviso: </b> <i>Sólo los administradores pueden agregar, modificar y/o eliminar entradas en esta categoría.</i>
+        {% endif %}
+
+    </fieldset>
+
+{% endfor %}
+{% endblock %}

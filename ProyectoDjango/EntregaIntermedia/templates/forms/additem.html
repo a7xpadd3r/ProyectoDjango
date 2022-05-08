@@ -1,0 +1,50 @@
+<center> Hijo: additem.html </center>
+{% extends 'home.html' %}
+{% block content %} 
+
+<head>
+    <title>zFinder {% if title %} | {{ title }} {% endif %}</title>
+</head>
+
+<fieldset>
+    <h1> <center> <b> Django MVT  </b> - Entrega intermedia </center> </h1> 
+</fieldset>
+
+<center>
+    <h1 style = 'color:blue'> <center> Agregar ítem nuevo a la base de datos </center> </h1>
+    <a href="{% url 'items' %}">Volver</a>
+</center>
+
+<fieldset>
+        <legend style = 'color:red'> {% if not newentry %} Ingrese los campos requeridos {% endif %} {% if newentry %} {{ message }} {% endif %}</legend>
+        
+        <form form = 'EntregaIntermedia/forms' enctype="multipart/form-data" method = 'POST'>
+
+            {% if errormessage %}
+                <fieldset> <center> <b style = 'color:red'> {{ errormessage }} </b> </center> </fieldset>
+            {% endif %}
+
+            {% if newentry %} <fieldset>
+            <p><b>Cantidad:</b> {{ newentry.itemquantity }}</p>
+            <p><b>Posición en el mundo (X,Y,Z):</b> {{ newentry.itemposX }},{{ newentry.itemposY }},{{ newentry.itemposZ }} </p>
+            <p><b>Fecha de creación:</b> {{ newentry.creationdate }}</p>
+            <p><b>Ícono: </b><img src="/media/{{ newentry.itemicon }}" width="50" height="50" align = center></br>
+            </fieldset>
+            <br></br> <a href="{% url 'additem' %}">¿Agregar otra entrada?</a>
+            {% endif %}
+
+{% if not newentry %}
+    {% csrf_token %}
+            <p>
+                {{ form.as_table }}
+                Los nombres de los ítems <b style = 'color:red'> son únicos</b>, no pueden repetirse ni cambiarse una vez agregados.
+            </p>
+            <input type = "submit" value = "Agregar ítem"> 
+    {% endif %}
+
+
+
+        </form>
+</fieldset>
+
+{% endblock %}

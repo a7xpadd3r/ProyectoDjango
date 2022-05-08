@@ -1,0 +1,44 @@
+<center> Hijo: searchuser.html </center>
+{% extends 'home.html' %}
+
+{% block content %} 
+
+<head>
+    <title>zFinder {% if title %} | {{ title }} {% endif %}</title>
+    
+</head>
+
+<center>
+    <h1 style = 'color:blue'> <center> Buscador de jugadores </center> </h1>
+    <a href="{% url 'players' %}">Volver</a>
+    
+<form form = 'EntregaIntermedia/forms' method = 'POST'>
+    {% csrf_token %}
+    <p>
+        {% comment %} {{ form.as_table }} disabled for now {% endcomment %}
+        Busque algún jugador por su nombre <br> </br>
+        <input type = "text" name = "playernick" placeholder = 'Jugador1, Jugador2, JuGaDoR3...' required>
+        <input type = "submit" value = "Buscar">
+    </p>
+
+</form>
+</center>
+    
+{% if not elements %}
+    <fieldset> <h1 style = 'color:red'> <center> {{ message }} </center> </h1></fieldset>
+{% endif %}
+
+{% for element in elements %}
+
+    <fieldset>
+        <legend style = 'color:blue'><b>{{ element.usernick }}</center></b></legend>
+        <p><b>ID del jugador:</b> {{ element.userid }}</p>
+        <p><b>Última conexión:</b> {{ element.userlastconnection }}</p>
+        <p><b>Posición en el mundo (X,Y,Z):</b> {{ element.userposX }},{{ element.userposY }},{{ element.userposZ }} </p>
+        <p><b>Creado por:</b> {{ element.createdby }} - <b>Fecha de creación:</b> {{ element.creationdate }} </p>
+        <p><b>Modificación hecha por:</b> {{ element.lastmodifiedby }} - <b>Última modificación:</b> {{ element.modificationdate }} </p>
+        <p><b>Avatar: </b><img src="/media/{{ element.playericon }}" width="68" height="80" align = center>
+    </fieldset>
+    
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,18 @@
+<center> Hijo: error.html </center>
+{% extends 'home.html' %}
+{% block content %} 
+
+<head>
+    <title>zFinder {% if title %} | {{ title }} {% endif %}</title>
+</head>
+
+<center> <h1 style = 'color:red'> Ha ocurrido un error. </h1>
+
+<fieldset>
+||
+<a href="{% url 'index' %}">Volver al inicio</a>
+||
+
+</fieldset> </center>
+
+{% endblock %}

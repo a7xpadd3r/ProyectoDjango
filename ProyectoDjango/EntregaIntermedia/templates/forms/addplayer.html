@@ -1,0 +1,48 @@
+<center> Hijo: addplayer.html </center>
+{% extends 'home.html' %}
+
+{% block content %} 
+
+<head>
+    <title>zFinder {% if title %} | {{ title }} {% endif %}</title>
+</head>
+
+<center>
+    <h1 style = 'color:blue'> <center> Agregar jugador nuevo a la base de datos </center> </h1>
+    <a href="{% url 'players' %}">Volver</a>
+</center>
+
+<fieldset>
+        <legend style = 'color:red'> {% if not newentry %} Ingrese los campos requeridos {% endif %} {% if newentry %} {{ message }} {% endif %} </legend>
+        
+        <form form = 'EntregaIntermedia/forms' enctype="multipart/form-data" method = 'POST'>
+            {% if errormessage %}
+                <fieldset> <center style = 'color:red'> <b> {{ errormessage }} </b> </center> </fieldset>
+            {% endif %}
+
+            {% if newentry %} <fieldset>
+            <p><b>ID del jugador:</b> {{ newentry.userid }}</p>
+            <p><b>Última conexión:</b> {{ newentry.userlastconnection }}</p>
+            <p><b>Posición en el mundo (X,Y,Z):</b> {{ newentry.userposX }},{{ newentry.userposY }},{{ newentry.userposZ }} </p>
+            <p><b>Fecha de creación:</b> {{ newentry.creationdate }} </p>
+
+            <p><b>Avatar: </b><img src="/media/{{ newentry.playericon }}" width="68" height="80" align = center> </fieldset>
+            <br></br> <a href="{% url 'adduser' %}">¿Agregar otra entrada?</a>
+            {% endif %}
+
+        {% if not newentry %}
+            {% csrf_token %}
+            <p>
+                {{ form.as_table }}
+                <b> <center> Formato de fecha: AAAA-MM-DD (Año, Mes, Día) </center> </b>
+                <center> El ID y el Avatar que se ingrese <b style = 'color:red'>no puede ser</b> uno que se encuentre en uso y <b style = 'color:red'>no puede modificarse luego</b>. </center>
+            </p>
+            <input type = "submit" value = "Agregar jugador">
+        </form>
+        {% endif %}
+
+        
+
+</fieldset>
+ 
+{% endblock %}
