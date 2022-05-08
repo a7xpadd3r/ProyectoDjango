@@ -17,9 +17,13 @@
 -> Dentro de cada categoría podemos realizar las siguientes interaciones (dependiendo del nivel de acceso):
 >       1- Buscar una entrada,        
 >       2- Agregar una entrada,       
->       3- Modificar una entrada y/o
->       4- Eliminar una entrada.
+>       3- Modificar una entrada y/o       
+>       4- Eliminar una entrada.       
 
+-> Restricción de interacción según el nivel de acceso:
+>       1- Invitados pueden ver y buscar entradas,               
+>       2- Usuarios registrados pueden agregar y modificar en algunas categorías, pero no eliminar,           
+>       3- Administradores pueden eliminar en todas las categorías, al igual que su edición y eliminación,           
 
 # Uso
 
