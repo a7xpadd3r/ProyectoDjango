@@ -1,29 +1,41 @@
 # Entrega Final - Irala Ariel - Comisión 28805
+# Features
+
+-> 4 categorías listas para el ingreso variado de datos:
+>       1- Jugadores,        
+>       2- Ítems,        
+>       3- Vehículos y        
+>       4- Administradores.
+
+-> Las cuales poseen, además de los respectivos a cada categoría, los siguientes parámetros en común:
+>       1. Fecha de creación,    
+>       2. Quién lo creó,    
+>       3. Fecha de modificación,    
+>       4. Quién lo modificó y    
+>       5. Una imagen de muestra.    
+
+-> Dentro de cada categoría podemos realizar las siguientes interaciones (dependiendo del nivel de acceso):
+>       1- Buscar una entrada,        
+>       2- Agregar una entrada,       
+>       3- Modificar una entrada y/o
+>       4- Eliminar una entrada.
+
 
 # Uso
-Nota: se requiere Pillow para iniciar el servidor.
 
--> Iniciar entorno virtual
--> Iniciar el servidor e ingresar a la dirección IP de la misma en formato IP:PUERTO.    
+*Se requiere Pillow en su entorno virtual para iniciar el servidor.*    
+
+-> Iniciar entorno virtual y luego el servidor.    
+-> Ingresar a la dirección IP de la misma en formato IP:PUERTO. *Por defecto, 127.0.0.1:8000.*    
 -> La base de datos ya posee algunas entradas disponibles para explorar.    
 -> Cuando se busca alguna entrada, se utiliza exactamente lo que se ingresa en el campo (sensible a mayúsculas).    
 -> Todas las secciones permiten volver al menú principal, pero no navegar entre ellas.    
--> La página principal nos permite navegar por las 3 secciones principales: 
-
-        1- Explorar la base de datos: ver todas las entradas de un modelo,        
-        2- Buscar entrada en la base de datos: buscar todas las entradas de un modelo que coincidan con el parámetro ingresado,        
-        3- Ingresar entrada en la base de datos: insertar una nueva entrada según el modelo y los parámetros deseados.
-
--> Cada sección nos otorga accesso a los 4 modelos disponibles:
-
-        1- Jugadores,        
-        2- Ítems,        
-        3- Vehículos,        
-        4- Administradores.
+> No es necesario iniciar sesión para explorar y buscar entradas, pero sí para agregar/modificar. Algunas requerirán de privilegios de administrador.
         
+# Vídeo de muestra
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/utxTCCqOEWs/0.jpg)](http://www.youtube.com/watch?v=utxTCCqOEWs "Demostración del Proyecto")
         
-# Consignas
+# Consignas de evaluación
 
 -> Entrega final:
        
@@ -51,4 +63,5 @@ Nota: se requiere Pillow para iniciar el servidor.
 
         1. Arreglar la subida de imágenes para los usuarios registrados.
         2. Implementar límite de objetos visibles en la vista general de cada categoría.
-        3. Implementar "Ver más" cuando se llegue al límite de objetos máximos a mostrar en las vistas generales de las categorías.
+        3. Implementar "Ver más" cuando se llegue al límite de objetos máximos a mostrar en las vistas generales de cada categorías.
+        4. Implementar el editor de texto avanzado Ckeditor.
