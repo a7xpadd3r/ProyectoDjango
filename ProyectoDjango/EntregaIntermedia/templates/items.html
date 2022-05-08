@@ -16,39 +16,14 @@
 </center>
 
 <h1 style = 'color:blue'> <center> <b> Ítems </b> - Longitud de la base de datos: {{ amount }}</center> </h1> 
-<fieldset> <center> 
-    ||
-    <a href="{% url 'index' %}">Volver al inicio</a>
-    ||{% if user.is_authenticated %}
-    <a href="{% url 'additem' %}">Agregar ítem</a>
-    ||{% endif %}
-    <a href="{% url 'searchitem' %}">Buscar ítem</a>
-    ||
-</center> </fieldset>
-
-
+<center> <a href="{% url 'index' %}">Volver</a></center> <br>
 {% for x in itemsdata %}
 
-<fieldset>
+    <fieldset>
         <legend style = 'color:red' ><b> {{ x.itemname }} </b></legend>
-        <p><b>Posición en la base de datos:</b> {{ forloop.counter0 }}</p>
+        <p><b>Tipo de dato y posición en la base de datos:</b> {{ x }}</p>
         <p><b>Cantidad:</b> {{ x.itemquantity }}</p>
         <p><b>Posición en el mundo (X,Y,Z):</b> {{ x.itemposX }},{{ x.itemposY }},{{ x.itemposZ }} </p>
-        <p><b>Fecha de creación:</b> {{ x.creationdate }}</p>
-        <p><b>Creado por:</b> {{ x.createdby }}</p>
-        <p><b>Última modificación:</b> {{ x.modificationdate }}</p>
-        <p><b>Modificación hecha por:</b> {{ x.lastmodifiedby }}</p>
-        <p><b>Ícono: </b><img src="/media/{{ x.itemicon }}" width="50" height="50" align = center></br>
-        {% if request.user.is_authenticated %}
-        ||
-        <a href="{% url 'edititem' x.itemname %}" value = >Modificar entrada</a>
-        ||{% endif %}{% if request.user.is_superuser %}
-        <a href="{% url 'deleteitem' x.itemname %}" value = >Eliminar entrada</a>
-        ||
-        {% endif %}
-        {% if not request.user.is_superuser %}
-        <b style = 'color:green'> Aviso: </b> <i>Sólo los administradores pueden eliminar entradas en esta categoría.</i>
-        {% endif %}
     </fieldset>
 
 {% endfor %}

@@ -8,33 +8,25 @@
 
 <center>
     <h1 style = 'color:blue'> <center> Agregar administrador nuevo a la base de datos </center> </h1>
-    <a href="{% url 'admins' %}">Volver</a>
+    <a href="{% url 'index' %}">Volver</a>
 </center>
 
 <fieldset>
-        <legend style = 'color:red'> {% if not newentry %} Ingrese los campos requeridos {% endif %} {% if newentry %} {{ message }} {% endif %} </legend>
+        <legend style = 'color:red'> Ingrese los campos requeridos</legend>
         
-        {% if newentry %} <fieldset> <center>
-        <p><b>Nivel de acceso:</b> {{ newentry.adminaccesslevel }} </p>
-        <p><b>Fecha de creación:</b> {{ newentry.creationdate }}
-        <p><b>Avatar: </b><img src="/media/{{ newentry.adminavatar }}" width="70" height="100" align = center></br>
-        <br></br> <a href="{% url 'addadmin' %}">¿Agregar otra entrada?</a>
-        </center> </fieldset> {% endif %}
-
-
-        {% if not newentry %}
-        <form form = 'EntregaIntermedia/forms' enctype="multipart/form-data" method = 'POST'>
+        <form form = 'EntregaIntermedia/forms' method = 'POST'>
             {% csrf_token %}
             <p>
-                {{ form.as_table }} 
-                <b style = 'color:red'> Puedes modificar luego su nivel de acceso pero no el ID asignado. </b>
+                {{ form.as_table }}
                 {% if form.value == 'xd'  %} <input type = "submit" value = "Agregar administrador"> {% endif %}
                 <input type = "submit" value = "Agregar administrador">
                 {% if message %}
-                <center> <b> {{ message }} </b> </center>
+                    <b> {{ message }} </b>
                 {% endif %}
             </p>
             
+        
+
             <fieldset>
                 <b style = 'color:green'>  Niveles de acceso </b>
                 <fieldset style='color:blue'> <b> observer: </b> <br>
@@ -63,7 +55,6 @@
                 </fieldset>
             </fieldset>
         </form>
-        {% endif %}
 </fieldset>
 
 {% endblock %}

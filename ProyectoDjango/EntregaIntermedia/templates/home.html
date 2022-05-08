@@ -1,7 +1,7 @@
 {% load static %}
 <center> Padre: home.html </center>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +10,9 @@
     
     <style>
         body {
-            font-family: "Bahnschrift", sans-serif;
-            margin: 0;
-            padding: 0;
+          font-family: "Bahnschrift", sans-serif;
+          margin: 0;
+          padding: 0;
         }
         form {
             display: flex;
@@ -27,100 +27,33 @@
             margin-bottom: 1rem;
             width: 100%;
         }
+        
     </style>
 
 </head>
 <body>
 
 <fieldset>
-    <h1> <center> <b> Django MVT  </b> - Entrega final </center> </h1> 
+    <h1> <center> <b> Django MVT  </b> - Entrega intermedia </center> </h1> 
 </fieldset>
 
-<center>
-    <table> 
-        <tr>
-            <td>
-                <fieldset>
-                    <br><b> Entrega intermedia</b></br>
-                    <br>Link de GitHub con el proyecto totalmente subido a la plataforma.
-                    <br>Proyecto Web Django con patrón MVT que incluya:
-                    <br> <b>1.</b> Herencia de HTML.
-                    <br> <b>2.</b> Por lo menos 3 clases en models.
-                    <br> <b>3.</b> Un formulario para insertar datos a todas las clases de tu models.
-                    <br> <b>4.</b> Un formulario para buscar algo en la BD.
-                    <br> <b>5.</b> Readme que indique el orden en el que se prueban las cosas y/o donde están las
-                    funcionalidades.
-                </fieldset>
-            </td>
-            <td>
-                <fieldset>    <br><b>Entrega final</b></br>
-                    <br> <b>1.</b> Al momento de ingresar a la app en la ruta base ‘/’.
-                    <br> <b>2.</b> Visualizar el home del blog.
-                    <br> <b>3.</b> Poder listar todas las páginas del blog, poder ver en detalle cada una, poder crear, editar o
-                    borrar páginas del blog.
-                    <br> <b>4.</b> Las páginas están formadas por un título, un contenido en editor de texto avanzado (ckeditor por ejemplo), una imagen, fecha de posteo de la imagen.                    
-                    <br> <b>5.</b> Tener una app de registro donde se puedan registrar usuarios en el route accounts/signup, un usuario está compuesto por: email - contraseña - nombre de usuario.
-                    <br> <b>6.</b> Tener una app de login en el route accounts/login/ la cual permite loguearse con los datos de administrador o de usuario normal.
-                    <br> <b>7.</b> Herencia de HTML.
-                    <br> <b>8.</b> Tener una app de perﬁles en el route accounts/proﬁle/ la cual muestra la info de nuestro usuario y permite poder modiﬁcar y/o borrar: imagen - nombre - descripción - un link a una página web - email y contraseña.
-                    <br> <b>9.</b> Contar con un admin en route admin/ donde se puedan manejar las apps y los datos en las apps.
-                </fieldset>
-            </td>
-        </tr>
-    </table>
-</center>
-
-{% if user.is_authenticated and not profile %}
-<fieldset style = 'color:green'> <center>
-<table>
-    <tr>
-        <td>
-            <fieldset>
-                <b style = 'color:green'>Iniciaste sesión como </b>{{ request.user.username }} 
-            </fieldset>
-        </td>
-        <td> 
-            <img src="/media/{{ request.user.profile.avatar }}" width="50" height="50" align = center>
-        </td>
-        <td>
-            <fieldset>
-                ||
-                <a href="{% url 'profile' %}">Ver perfil</a> 
-                ||
-                <a href="{% url 'logout' %}">Cerrar sesión</a> 
-                ||
-            <br> </fieldset>
-        </td>
-    </tr>
-</table> </center> </fieldset>
-{% endif %}
-
-
-{% if not user.is_authenticated and not regform and not logform and not profile %}
-<br>
-<center> <fieldset>
-    <br> <b> 
-    Algunas categorías requieren que tengas privilegios de administrador para interaccionar.</br></br>
-    {% if not logform %}
-    </b>
-    ||
-    <a href="{% url 'login' %}">Iniciar sesión</a>
-    {% endif %}
-    ||
-    <a href="{% url 'register' %}">Registrarse</a>
-    ||
-    </br><br>
-</fieldset> </center>
-{% endif %}
-
-
-</br></b>
+<fieldset>
+    <br><b> Se debe entregar: </b></br>
+    <br>Link de GitHub con el proyecto totalmente subido a la plataforma.
+    <br>Proyecto Web Django con patrón MVT que incluya:
+    <br> <b>1.</b> Herencia de HTML.
+    <br> <b>2.</b> Por lo menos 3 clases en models.
+    <br> <b>3.</b> Un formulario para insertar datos a todas las clases de tu models.
+    <br> <b>4.</b> Un formulario para buscar algo en la BD.
+    <br> <b>5.</b> Readme que indique el orden en el que se prueban las cosas y/o donde están las
+    funcionalidades.
+</fieldset>
 
 {% block content %}
 
-<center><fieldset>
-    <h1>  Explorar bases de datos </h1>
-</b>Puedes ver y buscar todas las entradas de cada categoría. <br></br>
+<fieldset>
+    <h1> <center> Explorar base de datos </center> </h1>
+    <center>
     ||
     <a href="{% url 'players' %}">Jugadores</a>
     ||
@@ -130,7 +63,39 @@
     ||
     <a href="{% url 'admins' %}">Administradores</a>
     ||
-</br></br></center>
+    </center>
+</fieldset>
+
+<fieldset>
+    <h1> <center> Buscar entrada en la base de datos </center> </h1>
+    <center>
+    ||
+    <a href="{% url 'searchuser' %}">Buscar jugador</a>
+    ||
+    <a href="{% url 'searchitem' %}">Buscar ítem</a>
+    ||
+    <a href="{% url 'searchvehicle' %}">Buscar vehículo</a>
+    ||
+    <a href="{% url 'searchadmin' %}">Buscar administrador</a>
+    ||
+    </center>
+</fieldset>
+
+<fieldset>
+    <h1> <center> Ingresar nueva entrada a la base de datos </center> </h1>
+    <center>
+    ||
+    <a href="{% url 'adduser' %}">Agregar jugador</a>
+    ||
+    <a href="{% url 'additem' %}">Agregar ítem</a>
+    ||
+    <a href="{% url 'addvehicle' %}">Agregar vehículo</a>
+    ||
+    <a href="{% url 'addadmin' %}">Agregar administrador</a>
+    ||
+    </center>
+</fieldset>
+
 {% endblock %}
 <hr><hr><hr>
 <h><center><b> Alumno:</b> Irala Ariel <br> <b>Comisión</b> 28805 </center></h>

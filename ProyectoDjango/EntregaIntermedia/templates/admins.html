@@ -12,37 +12,15 @@
 </center>
 
 <h1 style = 'color:blue'> <center> <b> Administradores </b> - Longitud de la base de datos: {{ amount }}</center> </h1> 
-<fieldset> <center> 
-    ||
-    <a href="{% url 'index' %}">Volver al inicio</a>
-    ||
-    {% if request.user.is_superuser %} <a href="{% url 'addadmin' %}">Agregar administrador</a>
-    || {% endif %}
-    <a href="{% url 'searchadmin' %}">Buscar administrador</a>
-    ||
-</center> </fieldset></b>
-
+<center> <a href="{% url 'index' %}">Volver</a></center> <br>
 {% for x in adminsdata %}
-<fieldset>
+
+    <fieldset>
         <legend style = 'color:red' ><b> {{ x.adminid }} </b></legend>
-        <p><b>Posición en la base de datos:</b> {{ forloop.counter0 }}</p>
+        <p><b>Tipo de dato y posición en la base de datos:</b> {{ x }}</p>
         <p><b>Nivel de acceso:</b> {{ x.adminaccesslevel }} </p>
-        <p><b>Fecha de creación:</b> {{ x.creationdate }}
-        <p><b>Creado por:</b> {{ x.createdby }}</p>
-        <p><b>Última modificación:</b> {{ x.modificationdate }} </p>
-        <p><b>Modificación hecha por:</b> {{ x.lastmodifiedby }}</p>
-        <p><b>Avatar: </b><img src="/media/{{ x.adminavatar }}" width="70" height="100" align = center></br>
-        {% if request.user.is_superuser %}
-        ||
-        <a href="{% url 'editadmin' x.adminid %}" value = >Modificar entrada</a>
-        ||
-        <a href="{% url 'deleteadmin' x.adminid %}" value = >Eliminar entrada</a>
-        ||
-        {% endif %}
-        {% if not request.user.is_superuser %}
-        <b style = 'color:green'> Aviso: </b> <i>Sólo los administradores pueden agregar, modificar y/o eliminar entradas en esta categoría.</i>
-        {% endif %}
     </fieldset>
+    
     {% if message %}
         <b> {{ message }} </b>
     {% endif %}

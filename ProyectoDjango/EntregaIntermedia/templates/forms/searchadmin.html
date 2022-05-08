@@ -8,7 +8,7 @@
 
 <center>
     <h1 style = 'color:blue'> <center> Buscador de administradores </center> </h1>
-    <a href="{% url 'admins' %}">Volver</a>
+    <a href="{% url 'index' %}">Volver</a>
     
 <form form = 'EntregaIntermedia/forms' method = 'POST'>
     {% csrf_token %}
@@ -17,6 +17,7 @@
         <br> <input type = "text" name = "accesslevel" placeholder = 'observer, moderator, administrator' required>
         <input type = "submit" value = "Buscar"> <br>
     </p>
+
 </form>
 </center>
     
@@ -28,10 +29,8 @@
 
     <fieldset>
         <legend style = 'color:green'>{{ element.adminid }}</legend>
+        <p><b>Tipo de dato y posición en la base de datos:</b> {{ element }}</p>
         <p><b>Nivel de acceso:</b> {{ element.adminaccesslevel }}</p>
-        <p><b>Creado por:</b> {{ element.createdby }} - <b>Fecha de creación:</b> {{ element.creationdate }} </p>
-        <p><b>Modificación hecha por:</b> {{ element.lastmodifiedby }} - <b>Última modificación:</b> {{ element.modificationdate }} </p>
-        <p><b>Avatar: </b><img src="/media/{{ element.adminavatar }}" width="70" height="100" align = center>
     </fieldset>
 
 {% endfor %}

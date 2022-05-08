@@ -10,7 +10,7 @@
 
 <center>
     <h1 style = 'color:blue'> <center> Buscador de jugadores </center> </h1>
-    <a href="{% url 'players' %}">Volver</a>
+    <a href="{% url 'index' %}">Volver</a>
     
 <form form = 'EntregaIntermedia/forms' method = 'POST'>
     {% csrf_token %}
@@ -29,16 +29,15 @@
 {% endif %}
 
 {% for element in elements %}
-
     <fieldset>
         <legend style = 'color:blue'><b>{{ element.usernick }}</center></b></legend>
+        <p><b>Tipo de dato y posición en la base de datos:</b> {{ element }}</p>
         <p><b>ID del jugador:</b> {{ element.userid }}</p>
         <p><b>Última conexión:</b> {{ element.userlastconnection }}</p>
         <p><b>Posición en el mundo (X,Y,Z):</b> {{ element.userposX }},{{ element.userposY }},{{ element.userposZ }} </p>
-        <p><b>Creado por:</b> {{ element.createdby }} - <b>Fecha de creación:</b> {{ element.creationdate }} </p>
-        <p><b>Modificación hecha por:</b> {{ element.lastmodifiedby }} - <b>Última modificación:</b> {{ element.modificationdate }} </p>
-        <p><b>Avatar: </b><img src="/media/{{ element.playericon }}" width="68" height="80" align = center>
     </fieldset>
-    
+
+
+
 {% endfor %}
 {% endblock %}

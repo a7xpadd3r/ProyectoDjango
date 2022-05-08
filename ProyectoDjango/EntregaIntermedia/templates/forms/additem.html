@@ -12,38 +12,21 @@
 
 <center>
     <h1 style = 'color:blue'> <center> Agregar ítem nuevo a la base de datos </center> </h1>
-    <a href="{% url 'items' %}">Volver</a>
+    <a href="{% url 'index' %}">Volver</a>
 </center>
 
 <fieldset>
-        <legend style = 'color:red'> {% if not newentry %} Ingrese los campos requeridos {% endif %} {% if newentry %} {{ message }} {% endif %}</legend>
+        <legend style = 'color:red'> Ingrese los campos requeridos</legend>
         
-        <form form = 'EntregaIntermedia/forms' enctype="multipart/form-data" method = 'POST'>
-
-            {% if errormessage %}
-                <fieldset> <center> <b style = 'color:red'> {{ errormessage }} </b> </center> </fieldset>
-            {% endif %}
-
-            {% if newentry %} <fieldset>
-            <p><b>Cantidad:</b> {{ newentry.itemquantity }}</p>
-            <p><b>Posición en el mundo (X,Y,Z):</b> {{ newentry.itemposX }},{{ newentry.itemposY }},{{ newentry.itemposZ }} </p>
-            <p><b>Fecha de creación:</b> {{ newentry.creationdate }}</p>
-            <p><b>Ícono: </b><img src="/media/{{ newentry.itemicon }}" width="50" height="50" align = center></br>
-            </fieldset>
-            <br></br> <a href="{% url 'additem' %}">¿Agregar otra entrada?</a>
-            {% endif %}
-
-{% if not newentry %}
-    {% csrf_token %}
+        <form form = 'EntregaIntermedia/forms' method = 'POST'>
+            {% csrf_token %}
             <p>
                 {{ form.as_table }}
-                Los nombres de los ítems <b style = 'color:red'> son únicos</b>, no pueden repetirse ni cambiarse una vez agregados.
             </p>
-            <input type = "submit" value = "Agregar ítem"> 
-    {% endif %}
-
-
-
+            <input type = "submit" value = "Agregar ítem">
+        {% if message %}
+            <b> {{ message }} </b>
+        {% endif %}
         </form>
 </fieldset>
 
