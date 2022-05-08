@@ -1,7 +1,14 @@
 # EntregaFinal-IralaAriel
-Proyecto Django MVT
+Proyecto Django 
 
->>Se debe entregar:
+Entrega final:
+
+
+
+
+
+
+ Entrega intermedia:
 Link de GitHub con el proyecto totalmente subido a la plataforma.
 Proyecto Web Django con patrón MVT que incluya:
 
